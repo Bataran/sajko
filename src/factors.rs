@@ -133,6 +133,20 @@ impl Questionaire {
             .filter(|q| q.code.starts_with("n"))
             .collect();
     }
+
+    /// The function accepts factors code as following:
+    /// Neuroticism: "n"
+    /// Extraversion: "e"
+    /// Agreeableness: "a"
+    /// Conscientiousness: "c"
+    /// Openness: "o"
+    pub fn get_factor_questions(&self, factor: char) -> Vec<&Question1> {
+        return self
+            .questions
+            .iter()
+            .filter(|q| q.code.starts_with(factor))
+            .collect();
+    }
 }
 
 #[derive(Deserialize, Debug)]

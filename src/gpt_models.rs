@@ -8,7 +8,7 @@ pub struct Message {
 #[derive(Serialize, Deserialize)]
 pub struct Prompt {
     pub model: String,
-    pub messages: Vec<Message>,
+    pub messages: Vec<Message>
 }
 #[derive(Deserialize, Debug)]
 pub struct GptResponse {
@@ -18,7 +18,7 @@ pub struct GptResponse {
     model: String,
     choices: Vec<Choice>,
     usage: Usage,
-    system_fingerprint: String,
+    system_fingerprint: Option<String>,
 }
 #[derive(Deserialize, Debug)]
 pub struct Choice {
@@ -27,9 +27,22 @@ pub struct Choice {
     logprobs: Option<bool>,
     finish_reason: String,
 }
+
+#[derive(Deserialize, Debug)]
+pub struct PromptTokensDetails {
+    cached_tokens: i32
+}
+
+#[derive(Deserialize, Debug)]
+pub struct CompletitionTokensDetails {
+    reasoning_tokens: i32
+}
+
 #[derive(Deserialize, Debug)]
 pub struct Usage {
     prompt_tokens: i32,
     completion_tokens: i32,
     total_tokens: i32,
+    prompt_tokens_details: PromptTokensDetails,
+    completion_tokens_details: CompletitionTokensDetails
 }
